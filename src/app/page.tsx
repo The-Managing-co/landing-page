@@ -8,11 +8,13 @@ import Planes from '../components/landing/Planes';
 import Footer from '../components/landing/Footer';
 import Products from '../components/landing/Products';
 import Research from '../components/landing/Research';
+import ContactUs from '../components/landing/ContactUs';
+import Commingsoon from '../components/landing/Commingsoon';
 
 export default function Home() {
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#020617] text-neutral-100 selection:bg-cyan-500 selection:text-black font-sans">
-      <Navbar />
+      {/* <Navbar />
       <Hero />
       <About />
       <Products/>
@@ -20,8 +22,10 @@ export default function Home() {
       <Work/>
       <Testimonials/>
       <Planes/>
+      <ContactUs/>
       <Research/>
-      <Footer/>
+      <Footer/> */}
+      <Commingsoon/>
     </main>
   );
 }

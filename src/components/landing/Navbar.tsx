@@ -75,7 +75,7 @@ export default function Navbar() {
               Log in
             </Link>
             <Link
-              href="#demo"
+              href="#contact"
               className="px-4 py-2 rounded-full text-xs font-semibold tracking-wide text-white border border-white/20 bg-white/[0.06] hover:bg-white/15 backdrop-blur-sm transition-all duration-200 active:scale-95 shadow-sm"
             >
               Book a demo
@@ -119,7 +119,7 @@ export default function Navbar() {
                 Log in
               </Link>
               <Link
-                href="#demo"
+                href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-center py-2 rounded-full text-xs font-semibold text-black bg-[#d4ff32] hover:bg-[#c2f022] shadow transition-colors"
               >
