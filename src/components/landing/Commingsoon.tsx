@@ -246,15 +246,10 @@ export default function Commingsoon() {
       </div>
 
       {/* ================= TOP NAVIGATION / BRAND BAR ================= */}
-      <header className="relative z-30 w-full max-w-[1020px] mx-auto px-4 sm:px-6 py-6 flex items-center justify-between">
+      <header className="relative z-30  max-w-[1020px] mx-auto px-4 sm:px-6 py-6 flex items-center justify-between">
      
          <img className='w-100 h-20' src="logo.png" alt="logo" />
       
-
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/[0.08] border border-white/15 backdrop-blur-md text-slate-300">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#d4ff32] animate-pulse"></span>
-          Launching Soon &bull; Q1 2026
-        </div>
       </header>
 
       {/* ================= MAIN COMING SOON CONTENT ================= */}

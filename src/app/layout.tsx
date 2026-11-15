@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { cn } from "@/lib/utils";
 
 const geistSans = Geist({
   variable: '--font-sans',
@@ -14,10 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Antimetal — Handle everything that happens after you deploy',
-  description: 'AI that investigates, fixes, and prevents issues by connecting your cloud platforms, observability tools, and code.',
+  title: 'The Managing Co',
+  description: 'It is a digital agency provide Web Development, AI Development, Mobile App Development and SEO Services.',
   icons: {
-    icon: '/logo.png',
+    icon: '/icon.webp',
   },
 };
 
@@ -27,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(geistSans.variable, geistMono.variable, "dark")}>
+    <html lang="en" className={(geistSans.variable, geistMono.variable, "dark")}>
       <body className="font-sans antialiased bg-[#020617] text-neutral-100 selection:bg-cyan-500 selection:text-black">
         {children}
       </body>
