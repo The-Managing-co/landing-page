@@ -13,20 +13,24 @@ export default function Commingsoon() {
 
   // Live Countdown Timer
   const [timeLeft, setTimeLeft] = useState({
-    days: 14,
-    hours: 8,
-    minutes: 42,
-    seconds: 19,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
 
   useEffect(() => {
-    // Target date: 14 days from now
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 14);
+    // Target date: Upcoming 1st January (00:00:00)
+    const now = new Date();
+    const targetYear = now.getFullYear();
+    let targetDate = new Date(targetYear, 0, 1, 0, 0, 0);
+    if (now.getTime() >= targetDate.getTime()) {
+      targetDate = new Date(targetYear + 1, 0, 1, 0, 0, 0);
+    }
 
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate.getTime() - now;
+    const updateCountdown = () => {
+      const currentTime = new Date().getTime();
+      const distance = targetDate.getTime() - currentTime;
 
       if (distance > 0) {
         setTimeLeft({
@@ -35,8 +39,13 @@ export default function Commingsoon() {
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((distance % (1000 * 60)) / 1000),
         });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
-    }, 1000);
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -204,6 +213,7 @@ export default function Commingsoon() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       className="relative w-full min-h-screen overflow-hidden bg-[#020617] text-white selection:bg-cyan-500 selection:text-black flex flex-col justify-between font-sans"
+      style={{ fontFamily: 'var(--font-sans), "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
     >
       {/* ================= ATMOSPHERIC COLOR GRADIENTS (MATCHING HERO) ================= */}
       
@@ -248,7 +258,7 @@ export default function Commingsoon() {
       {/* ================= TOP NAVIGATION / BRAND BAR ================= */}
       <header className="relative z-30  max-w-[1020px] mx-auto px-4 sm:px-6 py-6 flex items-center justify-between">
      
-         <img className='w-100 h-20' src="logo.png" alt="logo" />
+         <img className='contain' src="logo.svg" alt="logo" width={200} height={20} />
       
       </header>
 
@@ -263,7 +273,7 @@ export default function Commingsoon() {
           <span className="text-slate-200">
             Next-Gen Autonomous Agent Orchestration
           </span>
-          <span className="text-slate-400 text-sm leading-none">›</span>
+          <span className="text-white text-sm leading-none">›</span>
         </div>
 
         {/* Hero Heading */}
@@ -284,10 +294,10 @@ export default function Commingsoon() {
           
           {/* Days */}
           <div className="flex flex-col items-center justify-center w-16 sm:w-20 h-16 sm:h-20 rounded-2xl bg-white/[0.08] border border-white/15 backdrop-blur-md shadow-lg">
-            <span className="text-xl sm:text-3xl font-bold tracking-tight text-white font-mono">
+            <span className="text-xl sm:text-3xl font-bold tracking-tight text-white ">
               {String(timeLeft.days).padStart(2, '0')}
             </span>
-            <span className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase tracking-wider mt-0.5">
+            <span className="text-[10px] sm:text-[11px] font-medium text-white ">
               Days
             </span>
           </div>
@@ -296,10 +306,10 @@ export default function Commingsoon() {
 
           {/* Hours */}
           <div className="flex flex-col items-center justify-center w-16 sm:w-20 h-16 sm:h-20 rounded-2xl bg-white/[0.08] border border-white/15 backdrop-blur-md shadow-lg">
-            <span className="text-xl sm:text-3xl font-bold tracking-tight text-white font-mono">
+            <span className="text-xl sm:text-3xl font-bold tracking-tight text-white ">
               {String(timeLeft.hours).padStart(2, '0')}
             </span>
-            <span className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase tracking-wider mt-0.5">
+            <span className="text-[10px] sm:text-[11px] font-medium text-white uppercase tracking-wider mt-0.5">
               Hours
             </span>
           </div>
@@ -308,10 +318,10 @@ export default function Commingsoon() {
 
           {/* Minutes */}
           <div className="flex flex-col items-center justify-center w-16 sm:w-20 h-16 sm:h-20 rounded-2xl bg-white/[0.08] border border-white/15 backdrop-blur-md shadow-lg">
-            <span className="text-xl sm:text-3xl font-bold tracking-tight text-white font-mono">
+            <span className="text-xl sm:text-3xl font-bold tracking-tight text-white ">
               {String(timeLeft.minutes).padStart(2, '0')}
             </span>
-            <span className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase tracking-wider mt-0.5">
+            <span className="text-[10px] sm:text-[11px] font-medium text-white uppercase tracking-wider mt-0.5">
               Mins
             </span>
           </div>
@@ -320,87 +330,21 @@ export default function Commingsoon() {
 
           {/* Seconds */}
           <div className="flex flex-col items-center justify-center w-16 sm:w-20 h-16 sm:h-20 rounded-2xl bg-white/[0.08] border border-white/15 backdrop-blur-md shadow-lg">
-            <span className="text-xl sm:text-3xl font-bold tracking-tight text-[#d4ff32] font-mono">
+            <span className="text-xl sm:text-3xl font-bold tracking-tight text-[#d4ff32] ">
               {String(timeLeft.seconds).padStart(2, '0')}
             </span>
-            <span className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase tracking-wider mt-0.5">
+            <span className="text-[10px] sm:text-[11px] font-medium text-white uppercase tracking-wider mt-0.5">
               Secs
             </span>
           </div>
 
         </div>
 
-        {/* ================= WAITLIST SIGNUP FORM ================= */}
-        <div className="w-full max-w-md">
-          {isSubmitted ? (
-            <div className="flex items-center justify-center gap-2 p-4 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-medium backdrop-blur-md">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-              <span>You&apos;re on the priority waitlist! Check your inbox soon.</span>
-            </div>
-          ) : (
-            <form onSubmit={handleWaitlistSubmit} className="flex flex-col sm:flex-row items-center gap-2.5">
-              <input
-                type="email"
-                required
-                placeholder="Enter your work email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-5 py-3 rounded-full bg-white/[0.08] border border-white/20 text-white placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:bg-white/[0.12] transition-all backdrop-blur-md shadow-inner"
-              />
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-7 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide text-black bg-[#d4ff32] hover:bg-[#c4f224] transition-all duration-200 shadow-xl shadow-lime-400/25 active:scale-95 shrink-0 cursor-pointer flex items-center justify-center gap-2"
-              >
-                <span>Notify Me</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </form>
-          )}
 
-          {/* Social Proof Member Cluster */}
-          <div className="flex items-center justify-center gap-3 mt-6">
-            <div className="flex -space-x-2">
-              <img
-                className="w-7 h-7 rounded-full ring-2 ring-[#020617] object-cover"
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
-                alt="Member"
-              />
-              <img
-                className="w-7 h-7 rounded-full ring-2 ring-[#020617] object-cover"
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
-                alt="Member"
-              />
-              <img
-                className="w-7 h-7 rounded-full ring-2 ring-[#020617] object-cover"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80"
-                alt="Member"
-              />
-            </div>
-            <span className="text-xs text-slate-300">
-              Join <strong className="text-white font-semibold">2,480+</strong> teams on the waitlist
-            </span>
-          </div>
-
-        </div>
 
       </main>
 
-      {/* ================= BOTTOM FOOTER BAR ================= */}
-      <footer className="relative z-30 w-full max-w-[1020px] mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-        <p>&copy; 2026 ProHub. All rights reserved.</p>
-
-        <div className="flex items-center gap-6">
-          <Link href="#privacy" className="hover:text-white transition-colors">
-            Privacy Policy
-          </Link>
-          <Link href="#terms" className="hover:text-white transition-colors">
-            Terms of Service
-          </Link>
-          <Link href="#contact" className="hover:text-white transition-colors">
-            Contact
-          </Link>
-        </div>
-      </footer>
+   
     </div>
   );
 }

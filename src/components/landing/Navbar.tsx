@@ -36,24 +36,10 @@ export default function Navbar() {
           
           {/* Left: Antimetal Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            {/* Antimetal Signature Dot Cluster / Constellation Icon */}
-            <div className="relative w-6 h-6 flex items-center justify-center">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="text-white group-hover:text-lime-300 transition-colors">
-                <circle cx="5" cy="12" r="1.8" />
-                <circle cx="9" cy="8" r="1.8" />
-                <circle cx="9" cy="16" r="1.8" />
-                <circle cx="13" cy="5" r="1.8" />
-                <circle cx="13" cy="12" r="2.2" />
-                <circle cx="13" cy="19" r="1.8" />
-                <circle cx="18" cy="12" r="1.8" />
-              </svg>
-            </div>
-            <span className="text-lg font-semibold tracking-tight text-white group-hover:text-gray-200 transition-colors">
-              Antimetal
-            </span>
+        <img src="logo.svg" alt="logo" className="size-8" />
           </Link>
 
-          {/* Center: Navigation Links */}
+          {/* Center: Navigation Links */}  
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
